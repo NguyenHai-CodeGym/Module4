@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head-boostrap">
+
+</head>
+<body>
+
+<div class="container">
+    <div th:if="${mess}">
+        <div class="alert alert-success">
+            <strong th:text="${mess}"></strong>
+        </div>
+    </div>
+    <h2>List Product</h2>
+    <a href="/add">Create New Product</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Category</th>
+            <th colspan="2">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product, rowStart : ${productList}">
+            <td th:text="${product.getId()}"></td>
+            <td th:text="${product.getName()}"></td>
+            <td th:text="${product.getPrice()}"></td>
+            <td th:text="${product.getQuantity()}"></td>
+            <td th:text="${product.getCategory().getName()}"></td>
+            <td><a th:href="@{/edit/{id}(id=${product.getId()})}">EDIT</a></td>
+            <td><a th:href="@{/delete/{id}(id=${product.getId()})}" onclick="return confirm('Are you sure')">DELETE</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

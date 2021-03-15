@@ -24,7 +24,7 @@
     <h2>Caculator</h2>
     <form:form action="/process" method="post">
         <div class="form-group">
-            <input type="number" class="form-control" id="usr" name="fisrtNum">
+            <input type="number" class="form-control" id="usr" name="fisrtNum" required>
         </div>
         <div class="form-group">
             <select class="form-control" id="sel1" name="operator">
@@ -35,7 +35,7 @@
             </select>
         </div>
         <div class="form-group">
-            <input type="number" class="form-control" id="pwd" name="secondNum">
+            <input type="number" class="form-control" id="pwd" name="secondNum" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>

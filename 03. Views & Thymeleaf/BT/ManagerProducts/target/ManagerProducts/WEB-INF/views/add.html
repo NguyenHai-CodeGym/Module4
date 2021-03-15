@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head-boostrap">
+<body>
+<div class="container">
+    <h2>Create New Product</h2>
+    <form th:action="@{/doAdd}" method="post" th:object="${product}" >
+            <label for="usr">Name Product:</label>
+            <input type="text" class="form-control" id="usr" th:field="*{name}"/>
+            <label for="pwd">Price</label>
+            <input type="number" class="form-control" id="pwd" th:field="*{price}"/>
+            <label>Quantity</label>
+            <input type="number" class="form-control" th:field="*{quantity}"/>
+        <div class="form-group">
+            <label for="sel1">Category</label>
+            <select class="form-control" id="sel1"  th:field="*{category.id}">
+                <th:block  th:each="categorys : ${categoryList}">
+                    <option th:value="${categorys.getId()}" th:utext="${categorys.getName()}"></option>
+                </th:block>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>

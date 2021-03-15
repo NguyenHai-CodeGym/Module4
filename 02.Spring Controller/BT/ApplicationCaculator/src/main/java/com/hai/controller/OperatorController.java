@@ -17,25 +17,31 @@ public class OperatorController {
 
     @PostMapping("/process")
     public String operator(@RequestParam float fisrtNum, float secondNum, String operator, Model model){
-         switch (operator){
-             case "+":
-                 model.addAttribute("result", fisrtNum + secondNum);
-                 break;
-             case "-":
-                 model.addAttribute("result", fisrtNum - secondNum);
-                 break;
-             case "*":
-                 model.addAttribute("result",fisrtNum * secondNum);
-                 break;
-             case "/":
-                 if (secondNum == 0){
-                     model.addAttribute("result","Không thể chia 1 số cho 0");
-                 }else {
-                     model.addAttribute("result",fisrtNum / secondNum);
-                 }
-                 break;
-         }
+        try{
+            switch (operator){
+                case "+":
+                    model.addAttribute("result", fisrtNum + secondNum);
+                    break;
+                case "-":
+                    model.addAttribute("result", fisrtNum - secondNum);
+                    break;
+                case "*":
+                    model.addAttribute("result",fisrtNum * secondNum);
+                    break;
+                case "/":
+                    if (secondNum == 0){
+                        model.addAttribute("result","Không thể chia 1 số cho 0");
+                    }else {
+                        model.addAttribute("result",fisrtNum / secondNum);
+                    }
+                    break;
+            }
+        }catch (Exception e){
+            e.getMessage();
+            model.addAttribute("result","Lỗi trong quá trình nhập");
+        }
 
         return "index";
+
     }
 }
