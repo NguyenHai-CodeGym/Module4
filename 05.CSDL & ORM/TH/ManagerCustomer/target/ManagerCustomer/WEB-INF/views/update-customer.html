@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<div class="container">
+    <h2>Update Customer</h2>
+    <form th:action="@{/doEdit}" method="post" th:object="${customer}">
+        <input type="hidden" th:field="*{id}">
+        <div class="form-group">
+            <label for="usr">Name:</label>
+            <input type="text" class="form-control" id="usr" th:field="*{name}">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Emai:</label>
+            <input type="email" class="form-control" id="pwd" th:field="*{email}">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>

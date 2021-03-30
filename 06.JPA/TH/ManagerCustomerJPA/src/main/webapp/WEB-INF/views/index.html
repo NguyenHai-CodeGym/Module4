@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<div class="container">
+    <h2>List Customer</h2>
+    <a href="/add">Create New Product</a>
+    <div th:if="${mess}" class="alert alert-success">
+        <strong th:text="${mess}">}</strong>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td colspan="2">Action</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer : ${list}">
+            <td th:text="${customer.getId()}"></td>
+            <td th:text="${customer.getName()}"></td>
+            <td th:text="${customer.getEmail()}"></td>
+            <td><a th:href="@{/edit/{id}(id=${customer.getId()})}">EDIT</a></td>
+            <td><a th:href="@{/delete/{id}(id=${customer.getId()})}" onclick="return confirm('Are you sure')">DELETE</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

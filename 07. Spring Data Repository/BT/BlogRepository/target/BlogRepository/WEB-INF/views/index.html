@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<div class="container">
+    <h2>List Post</h2>
+    <form th:action="@{/search}" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" id="usr" name="search" placeholder="Find By Name">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <a href="/add">Create New Post</a><br>
+    <a href="/index">Back Menu</a>
+    <div th:if="${mess}" class="alert alert-success">
+        <strong th:text="${mess}">}</strong>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Title</td>
+            <td>Short Content</td>
+            <td>image</td>
+            <td>PubLish</td>
+            <td colspan="2">Action</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="post : ${list}">
+            <td th:text="${post.getId()}"></td>
+            <td th:text="${post.getTitle()}"></td>
+            <td th:text="${post.getShortContent()}"></td>
+            <td><img th:src="@{'../fieldUpload/'+${post.getImage()}}" style="width: 100px" alt=""></td>
+            <td th:text="${post.getPublish()}"></td>
+            <td th:utext="${post.getCategoryID().getName()}"></td>
+            <td><a th:href="@{/edit/{id}(id=${post.getId()})}">EDIT</a></td>
+            <td><a th:href="@{/delete/{id}(id=${post.getId()})}" onclick="return confirm('Are you sure')">DELETE</a></td>
+        </tr>
+        <div>
+            <a th:href="@{'/index'(page=${list.number - 1})}" th:if="${list.hasPrevious()}">Previous</a>
+            <span th:text="${list.number + 1}"></span>/<span th:text="${list.totalPages}"></span>
+            <a th:href="@{'/index'(page=${list.number + 1})}" th:if="${list.hasNext()}">Next</a>
+        </div>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

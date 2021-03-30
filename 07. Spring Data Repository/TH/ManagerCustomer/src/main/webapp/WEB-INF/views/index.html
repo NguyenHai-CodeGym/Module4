@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<div class="container">
+    <h2>List Customer</h2>
+    <form th:action="@{/search}" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" id="usr" name="search" placeholder="Find By Name">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <a href="/add">Create New Customer</a><br>
+    <a href="/index">Back Menu</a>
+    <div th:if="${mess}" class="alert alert-success">
+        <strong th:text="${mess}">}</strong>
+    </div>
+    <div th:if="${error != null}" class="alert alert-danger">
+        <strong th:utext="${error}">}</strong>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Province</td>
+            <td colspan="2">Action</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer : ${list}">
+            <td th:text="${customer.getId()}"></td>
+            <td th:text="${customer.getName()}"></td>
+            <td th:text="${customer.getEmail()}"></td>
+            <td th:text="${customer.getProvince().getName()}"></td>
+            <td><a th:href="@{/edit/{id}(id=${customer.getId()})}">EDIT</a></td>
+            <td><a th:href="@{/delete/{id}(id=${customer.getId()})}" onclick="return confirm('Are you sure')">DELETE</a></td>
+        </tr>
+        <div>
+            <a th:href="@{'/index'(page=${list.number - 1})}" th:if="${list.hasPrevious()}">Previous</a>
+            <span th:text="${list.number + 1}"></span>/<span th:text="${list.totalPages}"></span>
+            <a th:href="@{'/index'(page=${list.number + 1})}" th:if="${list.hasNext()}">Next</a>
+        </div>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

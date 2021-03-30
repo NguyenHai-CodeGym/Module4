@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h2>Create New Post</h2>
+    <form th:action="@{/doAdd}" method="post" th:object="${field}" enctype="multipart/form-data" >
+        <div class="form-group">
+            <label for="usr">Title:</label>
+            <input type="text" class="form-control" id="usr" th:field="*{post.title}">
+        </div>
+        <div class="form-group">
+            <label for="shortContent">Short Content</label>
+            <textarea class="form-control" id="shortContent" rows="3" th:field="*{post.shortContent}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="FullContent">Full Content</label>
+            <textarea class="form-control" id="FullContent" rows="3" th:field="*{post.fullContent}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="usr">Image</label>
+            <input type="file" class="form-control" th:field="*{multipartFile}">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>

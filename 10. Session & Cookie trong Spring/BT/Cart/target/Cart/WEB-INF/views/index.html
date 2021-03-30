@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<div class="container">
+    <h2>List Customer</h2>
+    <form th:action="@{/search}" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" id="usr" name="search" placeholder="Find By Name">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <a href="/add">Create New Product</a><br>
+    <a href="/index">Back Menu</a>
+    <div th:if="${mess}" class="alert alert-success">
+        <strong th:text="${mess}">}</strong>
+    </div>
+    <div th:if="${error != null}" class="alert alert-danger">
+        <strong th:utext="${error}">}</strong>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Image</td>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Price</td>
+            <td colspan="2">Action</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${list}">
+            <td th:text="${product.id}"></td>
+            <td><img th:src="${product.image}" alt="" style="width: 100px"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.price}"></td>
+            <td><a th:href="@{/cart/{id}(id=${product.getId()})}">Thêm vào giỏ hàng</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
